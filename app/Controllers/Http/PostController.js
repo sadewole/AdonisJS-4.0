@@ -4,7 +4,7 @@
 const Post = use('App/Models/Post')
 // import validator
 const {
-  validator
+  validate
 } = use('Validator')
 
 class PostController {
@@ -44,13 +44,13 @@ class PostController {
     session
   }) {
     // validation input
-    const validation = await validator(request.findall(), {
+    const validation = await validate(request.all(), {
       title: 'required|min:3|max:255',
       body: 'required|min:3'
     })
 
-    if (validation.fail()) {
-      session.withErrors(validator.messages()).flashAll()
+    if (validation.fails()) {
+      session.withErrors(validate.messages()).flashAll()
       return response.redirect('back')
     }
 
@@ -85,13 +85,13 @@ class PostController {
     session
   }) {
     // validation input
-    const validation = await validator(request.findall(), {
+    const validation = await validate(request.all(), {
       title: 'required|min:3|max:255',
       body: 'required|min:3'
     })
 
-    if (validation.fail()) {
-      session.withErrors(validator.messages()).flashAll()
+    if (validation.fails()) {
+      session.withErrors(validate.messages()).flashAll()
       return response.redirect('back')
     }
 
